@@ -7,7 +7,8 @@
 
     @param {string} originalTime - the start time to add minutes to
       format follows "[H]H:MM {AM|PM}", i.e. "12:34 PM"
-    @param {number} minutesToAdd - an integer value representing
+    @param {number} minutesToAdd - an integer value representing the
+      number of minutes to add
     @return {string} the result time with minutes added
       format follows "HH:MM {AM|PM}", i.e. "12:34 PM"
 
@@ -30,6 +31,11 @@ export default function addMinutes(originalTime: string, minutesToAdd: number)
         throw new Error('Bad time format');
     }
 
+    // no-op check
+    if (minutesToAdd === 0) {
+        return originalTime;
+    }
+
     // parse/extract time variables
     const [ numbers, originalAmPm ] = originalTime.trim().split(' ');
     const [ originalHour, originalMinute ] = numbers.split(':').map(n => parseInt(n, 10));
@@ -38,7 +44,7 @@ export default function addMinutes(originalTime: string, minutesToAdd: number)
     const totalMinutes: number = minutesToAdd + originalMinute;
     const newMinuteValue: number = totalMinutes % MINUTES_IN_AN_HOUR;
 
-    // calculate hours
+    // calculate hours to add
     const hoursToAdd: number = totalMinutes >= MINUTES_IN_AN_HOUR ? Math.floor(totalMinutes / MINUTES_IN_AN_HOUR) : 0;
     let newAmPmValue: string = originalAmPm.toUpperCase();
     let newHourValue: number = originalHour;
@@ -70,6 +76,3 @@ export default function addMinutes(originalTime: string, minutesToAdd: number)
     
     return `${expandedHour}:${expandedMinute} ${newAmPmValue}`;
 }
-
-
-
