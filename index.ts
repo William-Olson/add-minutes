@@ -7,6 +7,10 @@ const testCases: Array<[ string, string, number, string ]> = [
     [ 'same PM (less than 12 hours) example',      '05:00 PM', 5,    '05:05 PM' ],
     [ 'same AM (24 hours) example',                '08:15 AM', 1440, '08:15 AM' ],
     [ 'same PM (24 hours) example',                '08:15 PM', 1440, '08:15 PM' ],
+    [ 'max minutes example',                       '08:15 PM', Number.MAX_VALUE, '08:08 PM' ],
+    [ 'min minutes example',                       '08:15 PM', Number.MIN_VALUE, '08:15 PM' ],
+    [ 'time input validation example',             '23:45 AM', 2, 'Bad time format' ],
+    [ 'minutes input validation example',          '10:45 AM', -2, 'Bad minutes param' ],
     [ 'flipping AM to PM (small minutes) example', '11:55 AM', 10,   '12:05 PM' ],
     [ 'flipping PM to AM (small minutes) example', '11:55 PM', 30,   '12:25 AM' ],
     [ 'flipping AM to PM (with 8 hours) example',  '10:00 AM', 480,  '06:00 PM' ],
@@ -17,27 +21,42 @@ const testCases: Array<[ string, string, number, string ]> = [
     [ 'starting on 12 PM (flip) example',          '12:45 PM', 1080, '06:45 AM' ]
 ];
 
+let total = 0, pass = 0, fail = 0;
+
 /*
 
     Helper function for logging test case results
 
 */
 function test(label: string, time: string, minutes: number, expected: string) {
-    const result = addMinutes(time, minutes);
+    total++;
+    let result;
 
-    // show errors on failed tests
+    try {
+        result = addMinutes(time, minutes);
+    }
+    catch(e) {
+        // expected error
+        if (e && e.message && e.message === expected) {
+            console.log(`\n√ [${label}] error caught: ${expected}\n`);
+            pass++;
+            return;
+        }
+        // unexpected error
+        result = `Error: ${e.message}`;
+    }
+
     if (result !== expected) {
-        console.error(`
-          X (Err!!!)==> [${label}] ${time} + ${minutes} minutes Failed!
-            expected: ${expected}, but actual was: ${result}
-        `);
+        fail++;
+        console.error('\n' +
+            `X *(Error)* [${label}] ${time} + ${minutes} minutes Failed!\n` +
+            `expected: ${expected}, but actual was: ${result}\n`
+        );
         return;
     }
 
-    // show results on passing tests
-    console.log(`
-      √ [${label}] ${time} + ${minutes} minutes = ${result}
-    `);
+    pass++;
+    console.log(`\n√ [${label}] ${time} + ${minutes} minutes = ${result}\n`);
 }
 
 /*
@@ -48,3 +67,10 @@ function test(label: string, time: string, minutes: number, expected: string) {
 for (const args of testCases) {
     test(...args);
 }
+
+// log test results summary
+console.info(`
+    Summary:
+
+        Failed: ${fail}, Passed: ${pass}, Total: ${total}
+`);
