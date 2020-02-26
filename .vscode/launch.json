@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "MyDebugger",
+            "sourceMaps": true,
+            "program": "${workspaceFolder}/build/index.js",
+            "preLaunchTask": "tsc: build - tsconfig.json",
+            "outFiles": [ "build/**/*.js" ]
+        }
+    ]
+}
+
