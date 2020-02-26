@@ -4,6 +4,8 @@ Simple function that will add minutes to a given time and adjust AM/PM as needed
 
 See [addMinutes.ts](addMinutes.ts) file for implementation details.
 
+Note: see the `javascript-version` branch for the JavaScript version of the implementation.
+
 ## How to run
 
 **Requirements**
