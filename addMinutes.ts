@@ -16,9 +16,9 @@
 export default function addMinutes(originalTime: string, minutesToAdd: number)
 {
     // regular expression for validating time format
-    const timeFormatCheck: RegExp = /^((1[0-2])|(0?[1-9])):(([1-5][0-9])|(0[0-9]))[ ]([aA]|[pP])[mM]$/gm;
+    const timeFormatCheck: RegExp = /^((1[0-2])|(0?[1-9])):[0-5][0-9][ ]([aA]|[pP])[mM]$/gm;
 
-    // some immutable constants for calculating time arithmetic
+    // constants for time calculations
     const MINUTES_IN_AN_HOUR = 60;
     const MAX_HOUR = 12;
 
