@@ -6,6 +6,10 @@ See [addMinutes.ts](addMinutes.ts) file for implementation details.
 
 ## How to run
 
+**Requirements**
+
+- Node.js (version 8 or newer)
+
 **Clone the repository**
 
 ```
