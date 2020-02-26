@@ -52,7 +52,7 @@ export default function addMinutes(originalTime: string, minutesToAdd: number)
     // handle hour arithmetic
     if (hoursToAdd) {
         // get the new hour and check if ante meridiem flip is needed
-        let shouldFlipAmPm: boolean = !!(((hoursToAdd + originalHour) / MAX_HOUR) % 2);
+        let shouldFlipAmPm: boolean = !!(Math.floor((hoursToAdd + originalHour) / MAX_HOUR) % 2);
         newHourValue = (hoursToAdd + originalHour) % MAX_HOUR;
 
         // convert the hour value of 0 to 12 if needed
