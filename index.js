@@ -1,7 +1,7 @@
-import addMinutes from './addMinutes';
+const addMinutes =  require('./addMinutes');
 
 // test case input params
-const testCases: Array<[ string, string, number, string ]> = [
+const testCases = [
     [ 'original example',                          '09:13 AM', 200,  '12:33 PM' ],
     [ 'same AM (less than 12 hours) example',      '05:00 AM', 120,  '07:00 AM' ],
     [ 'same PM (less than 12 hours) example',      '05:00 PM', 5,    '05:05 PM' ],
@@ -28,7 +28,7 @@ let total = 0, pass = 0, fail = 0;
     Helper function for logging test case results
 
 */
-function test(label: string, time: string, minutes: number, expected: string) {
+function test(label, time, minutes, expected) {
     total++;
     let result;
 

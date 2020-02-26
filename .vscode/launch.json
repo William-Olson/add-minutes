@@ -5,10 +5,7 @@
             "type": "node",
             "request": "launch",
             "name": "MyDebugger",
-            "sourceMaps": true,
-            "program": "${workspaceFolder}/build/index.js",
-            "preLaunchTask": "tsc: build - tsconfig.json",
-            "outFiles": [ "build/**/*.js" ]
+            "program": "${workspaceFolder}/index.js"
         }
     ]
 }

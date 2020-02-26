@@ -13,10 +13,10 @@
       format follows "HH:MM {AM|PM}", i.e. "12:34 PM"
 
 */
-export default function addMinutes(originalTime: string, minutesToAdd: number)
+module.exports = function addMinutes(originalTime, minutesToAdd)
 {
     // regular expression for validating time format
-    const timeFormatCheck: RegExp = /^((1[0-2])|(0?[1-9])):[0-5][0-9][ ]([aA]|[pP])[mM]$/gm;
+    const timeFormatCheck = /^((1[0-2])|(0?[1-9])):[0-5][0-9][ ]([aA]|[pP])[mM]$/gm;
 
     // constants for time calculations
     const MINUTES_IN_AN_HOUR = 60;
@@ -41,18 +41,18 @@ export default function addMinutes(originalTime: string, minutesToAdd: number)
     const [ originalHour, originalMinute ] = numbers.split(':').map(n => parseInt(n, 10));
 
     // calculate new minute value
-    const totalMinutes: number = minutesToAdd + originalMinute;
-    const newMinuteValue: number = totalMinutes % MINUTES_IN_AN_HOUR;
+    const totalMinutes = minutesToAdd + originalMinute;
+    const newMinuteValue = totalMinutes % MINUTES_IN_AN_HOUR;
 
     // calculate hours to add
-    const hoursToAdd: number = totalMinutes >= MINUTES_IN_AN_HOUR ? Math.floor(totalMinutes / MINUTES_IN_AN_HOUR) : 0;
-    let newAmPmValue: string = originalAmPm.toUpperCase();
-    let newHourValue: number = originalHour;
+    const hoursToAdd = totalMinutes >= MINUTES_IN_AN_HOUR ? Math.floor(totalMinutes / MINUTES_IN_AN_HOUR) : 0;
+    let newAmPmValue = originalAmPm.toUpperCase();
+    let newHourValue = originalHour;
 
     // handle hour arithmetic
     if (hoursToAdd) {
         // get the new hour and check if ante meridiem flip is needed
-        let shouldFlipAmPm: boolean = !!(Math.floor((hoursToAdd + originalHour) / MAX_HOUR) % 2);
+        let shouldFlipAmPm = !!(Math.floor((hoursToAdd + originalHour) / MAX_HOUR) % 2);
         newHourValue = (hoursToAdd + originalHour) % MAX_HOUR;
 
         // convert the hour value of 0 to 12 if needed

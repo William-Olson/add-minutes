@@ -4,12 +4,10 @@
   "description": "",
   "main": "build/index.js",
   "scripts": {
-    "start": "tsc && node build/index.js",
+    "start": "node index.js",
     "test": "npm start"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "typescript": "^3.8.2"
-  }
+  "dependencies": { }
 }
